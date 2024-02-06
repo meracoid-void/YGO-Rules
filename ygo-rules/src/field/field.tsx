@@ -1,65 +1,74 @@
+// Field.tsx
 import React from 'react';
-import './field.css'; // Assuming you have a CSS file for styling
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import Zone from '../zone/zone'; // Import your Zone component
+import './field.css'; // Import your CSS for styling
 
-const Field = () => {
-    const allowDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault(); // Necessary to allow dropping
-      };
-    
-      const drop = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        const card_id = e.dataTransfer.getData('card_id');
-        // Ensure the target is the intended drop zone to avoid dropping inside a child element
-        const dropZone = e.target as HTMLDivElement; // Cast the target to be more specific if needed
-        const card = document.getElementById(card_id);
-        if (card && dropZone.classList.contains('zone')) {
-          dropZone.appendChild(card); // Append the card to the zone
-        }
-      };
+// Optionally, if you have defined specific zone types
+import { ZoneType } from '../zone/zoneTypes'; // Adjust path as necessary
 
-  return (
-    <div className="yu-gi-oh-field">
-        <div className="zone deck" onDragOver={allowDrop} onDrop={drop}>D</div>
-        <div className="zone pendulum" onDragOver={allowDrop} onDrop={drop}>P/S</div>
-        <div className="zone spell" onDragOver={allowDrop} onDrop={drop}>S</div>
-        <div className="zone spell" onDragOver={allowDrop} onDrop={drop}>S</div>
-        <div className="zone spell" onDragOver={allowDrop} onDrop={drop}>S</div>
-        <div className="zone pendulum" onDragOver={allowDrop} onDrop={drop}>P/S</div>
-        <div className="zone extra" onDragOver={allowDrop} onDrop={drop}>E</div>
-        
-        <div className="zone graveyard" onDragOver={allowDrop} onDrop={drop}>G</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone field" onDragOver={allowDrop} onDrop={drop}>F</div>
-        
-        <div className="zone banished" onDragOver={allowDrop} onDrop={drop}>B</div>
-        <div className="zone placeholder">X</div>
-        <div className="zone extra-monster" onDragOver={allowDrop} onDrop={drop}>EM</div>
-        <div className="zone placeholder">X</div>
-        <div className="zone extra-monster" onDragOver={allowDrop} onDrop={drop}>EM</div>
-        <div className="zone placeholder">X</div>
-        <div className="zone banished" onDragOver={allowDrop} onDrop={drop}>B</div>
-        
-        <div className="zone field" onDragOver={allowDrop} onDrop={drop}>F</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone monster" onDragOver={allowDrop} onDrop={drop}>M</div>
-        <div className="zone graveyard" onDragOver={allowDrop} onDrop={drop}>G</div>
-        
-        <div className="zone extra" onDragOver={allowDrop} onDrop={drop}>E</div>
-        <div className="zone pendulum" onDragOver={allowDrop} onDrop={drop}>P/S</div>
-        <div className="zone spell" onDragOver={allowDrop} onDrop={drop}>S</div>
-        <div className="zone spell" onDragOver={allowDrop} onDrop={drop}>S</div>
-        <div className="zone spell" onDragOver={allowDrop} onDrop={drop}>S</div>
-        <div className="zone pendulum" onDragOver={allowDrop} onDrop={drop}>P/S</div>
-        <div className="zone deck" onDragOver={allowDrop} onDrop={drop}>D</div>
-    </div>
-  );
-};
-
-export default Field;
+const Field: React.FC = () => {
+    return (
+      <DndProvider backend={HTML5Backend}>
+        <div className="yu-gi-oh-field">
+          {/* First Row: Extra Deck, Pendulum Zones, Spell Zones, Pendulum Zone, Deck */}
+          <div className="field-row">
+            <Zone type="deck" label="D" />
+            <Zone type="pendulum" label="P/S" />
+            <Zone type="spell" label="S" />
+            <Zone type="spell" label="S" />
+            <Zone type="spell" label="S" />
+            <Zone type="pendulum" label="P/S" />
+            <Zone type="extra" label="E" />
+          </div>
+  
+          {/* Second Row: Graveyard, Monster Zones, Field Zone */}
+          <div className="field-row">
+            <Zone type="graveyard" label="G" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="field" label="F" />
+          </div>
+  
+          {/* Third Row: Banished, Extra Monster Zones */}
+          <div className="field-row">
+            <Zone type="banished" label="B" />
+            <div className="zone">X</div> {/* Placeholder for alignment */}
+            <Zone type="extra-monster" label="EM" />
+            <div className="zone">X</div> {/* Placeholder for alignment */}
+            <Zone type="extra-monster" label="EM" />
+            <div className="zone">X</div> {/* Placeholder for alignment */}
+            <Zone type="banished" label="B" />
+          </div>
+  
+          {/* Fourth Row: Mirror of Second Row for Player 2 */}
+          <div className="field-row">
+            <Zone type="field" label="F" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="monster" label="M" />
+            <Zone type="graveyard" label="G" />
+          </div>
+  
+          {/* Fifth Row: Mirror of First Row for Player 2 */}
+          <div className="field-row">
+            <Zone type="extra" label="E" />
+            <Zone type="pendulum" label="P/S" />
+            <Zone type="spell" label="S" />
+            <Zone type="spell" label="S" />
+            <Zone type="spell" label="S" />
+            <Zone type="pendulum" label="P/S" />
+            <Zone type="deck" label="D" />
+          </div>
+        </div>
+      </DndProvider>
+    );
+  };
+  
+  export default Field;

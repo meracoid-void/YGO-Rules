@@ -1,36 +1,23 @@
 .yu-gi-oh-field {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
-    max-width: 600px;
-    margin: auto;
+  }
+  
+  .field-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
   }
   
   .zone {
+    width: 60px; /* Adjust based on your preference */
+    height: 80px; /* Adjust based on your preference */
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 100px; /* Ensure there's enough room for a card */
+    align-items: center;
     border: 1px solid black;
-    position: relative; /* To position cards inside properly */
-  }
-  
-  
-  /* Add more specific styles for each type of zone if needed */
-  .monster {
-    background-color: #add8e6;
-  }
-  
-  .spell, .pendulum {
-    background-color: #90ee90;
-  }
-  
-  .extra, .deck, .graveyard, .field, .banished, .extra-monster {
-    background-color: #f4c2c2;
-  }
-  
-  .placeholder {
-    background-color: transparent;
-    border: none;
+    text-align: center;
   }
   

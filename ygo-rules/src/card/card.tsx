@@ -1,28 +1,34 @@
-// Card.js or Card.tsx
+// Card.tsx
 import React from 'react';
+import { useDrag } from 'react-dnd';
+import { CardType } from './cardObj'; // Import the Card interface
 
-// Define an interface for the component props
 interface CardProps {
-  id: string;
-  content: string;
+    card: CardType;
 }
+  
+const Card: React.FC<CardProps> = ({ card }) => {
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: 'CARD', // This should match the 'accept' in Zone's useDrop
+        item: { id: card.id, type: card.type },
+        collect: monitor => ({
+          isDragging: !!monitor.isDragging(),
+        }),
+      }));
 
-const Card: React.FC<CardProps> = ({ id, content }) => {
-  const dragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData('card_id', id);
-  };
-
-  return (
-    <div
-      id={id}
-      draggable="true"
-      onDragStart={dragStart}
-      className="card"
-      style={{ padding: '10px', margin: '10px', border: '1px solid black', cursor: 'move' }}
-    >
-      {content}
-    </div>
-  );
+    return (
+        <div
+        ref={drag}
+        style={{
+            opacity: isDragging ? 0.5 : 1,
+            border: '1px solid black',
+            padding: '10px',
+            cursor: 'move',
+        }}
+        >
+        {card.content}
+        </div>
+    );
 };
 
 export default Card;
