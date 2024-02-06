@@ -1,0 +1,35 @@
+.yu-gi-oh-field {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    border: 1px solid black;
+    background-color: #f0f0f0;
+  }
+  
+  /* Add more specific styles for each type of zone if needed */
+  .monster {
+    background-color: #add8e6;
+  }
+  
+  .spell, .pendulum {
+    background-color: #90ee90;
+  }
+  
+  .extra, .deck, .graveyard, .field, .banished, .extra-monster {
+    background-color: #f4c2c2;
+  }
+  
+  .placeholder {
+    background-color: transparent;
+    border: none;
+  }
+  
