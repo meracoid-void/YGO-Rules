@@ -16,11 +16,11 @@ const Field: React.FC = () => {
           <div className="field-row">
             <Zone type="deck" label="D" />
             <Zone type="pendulum" label="P/S" />
-            <Zone type="spell" label="S" />
-            <Zone type="spell" label="S" />
-            <Zone type="spell" label="S" />
+            <Zone type="spell-trap" label="S" />
+            <Zone type="spell-trap" label="S" />
+            <Zone type="spell-trap" label="S" />
             <Zone type="pendulum" label="P/S" />
-            <Zone type="extra" label="E" />
+            <Zone type="extra-deck" label="E" />
           </div>
   
           {/* Second Row: Graveyard, Monster Zones, Field Zone */}
@@ -31,7 +31,7 @@ const Field: React.FC = () => {
             <Zone type="monster" label="M" />
             <Zone type="monster" label="M" />
             <Zone type="monster" label="M" />
-            <Zone type="field" label="F" />
+            <Zone type="field-spell" label="F" />
           </div>
   
           {/* Third Row: Banished, Extra Monster Zones */}
@@ -47,7 +47,7 @@ const Field: React.FC = () => {
   
           {/* Fourth Row: Mirror of Second Row for Player 2 */}
           <div className="field-row">
-            <Zone type="field" label="F" />
+            <Zone type="field-spell" label="F" />
             <Zone type="monster" label="M" />
             <Zone type="monster" label="M" />
             <Zone type="monster" label="M" />
@@ -58,11 +58,11 @@ const Field: React.FC = () => {
   
           {/* Fifth Row: Mirror of First Row for Player 2 */}
           <div className="field-row">
-            <Zone type="extra" label="E" />
+            <Zone type="extra-deck" label="E" />
             <Zone type="pendulum" label="P/S" />
-            <Zone type="spell" label="S" />
-            <Zone type="spell" label="S" />
-            <Zone type="spell" label="S" />
+            <Zone type="spell-trap" label="S" />
+            <Zone type="spell-trap" label="S" />
+            <Zone type="spell-trap" label="S" />
             <Zone type="pendulum" label="P/S" />
             <Zone type="deck" label="D" />
           </div>

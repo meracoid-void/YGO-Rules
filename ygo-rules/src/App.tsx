@@ -11,6 +11,7 @@ import { CardType } from './card/cardObj';
 const demoCard: CardType = {
   id: '1',
   type: 'monster', // This now correctly matches the CardType definition
+  cardId: '1',
   content: 'Demo Monster Card',
 };
 
