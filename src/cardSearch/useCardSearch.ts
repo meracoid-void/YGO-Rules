@@ -23,7 +23,7 @@ export const useCardSearch = (query: string) => {
     }
 
     setLoading(true);
-    axios.get<ApiResponse>(`https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=${query}`)
+    axios.get<ApiResponse>(`https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=${query}&misc=yes`)
       .then(response => {
         setError(null);
         setCards(response.data.data); // Adjust based on your API's response structure

@@ -12,6 +12,7 @@ export interface CardType {
     card_sets: CardSet[];
     card_images: CardImage[];
     card_prices: CardPrice[];
+    misc_info: MiscInfo[];
   }
   
   interface CardSet {
@@ -37,3 +38,15 @@ export interface CardType {
     coolstuffinc_price: string;
   }
   
+  interface MiscInfo {
+    views: number;
+    viewsweek: number;
+    upvotes: number;
+    downvotes: number;
+    formats: string[];
+    beta_id: number;
+    tcg_date: string;
+    ocg_date: string;
+    konami_id: number;
+    has_effect: number;
+  }

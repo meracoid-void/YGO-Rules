@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'CARD', // This should match the 'accept' in Zone's useDrop
-        item: { type: card.type, id: card.id, name: card.name },
+        item: { type: card.type, id: card.id, name: card.name, misc_info: card.misc_info },
         collect: monitor => ({
           isDragging: !!monitor.isDragging(),
         }),
