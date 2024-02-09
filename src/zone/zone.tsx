@@ -10,9 +10,10 @@ interface ZoneProps {
     type: 'graveyard' | 'banished' | 'monster' | 'spell-trap' | 'field-spell' | 'extra-monster' | 'deck' | 'pendulum' | 'extra-deck'; // Extend as needed
     label: string;
     onCardDrop: () => void; // Function to increment card ID
+    fetchRulingsForCard: (cardId: number) => Promise<void>;
   }
   
-  const Zone: React.FC<ZoneProps> = ({ type, label, onCardDrop }) => {
+  const Zone: React.FC<ZoneProps> = ({ type, label, onCardDrop, fetchRulingsForCard }) => {
     // Adjusting state to hold an array of CardType
     const [cardsInZone, setCardsInZone] = useState<CardType[]>([]);
 
@@ -34,7 +35,7 @@ interface ZoneProps {
         const cardName = item.misc_info[0].konami_id; // or item.id, depending on the API requirement
 
         try {
-          const rulingsResponse = await axios.get(`https://db.ygorganization.com/data/card/${cardName}`);
+          const rulingsResponse = await axios.get(`https://db.ygorganization.com/data/qa/${cardName}`);
           // Process and display rulings here or set state to hold rulings data
           console.log(rulingsResponse.data); // Example: log fetched data
         } catch (error) {
