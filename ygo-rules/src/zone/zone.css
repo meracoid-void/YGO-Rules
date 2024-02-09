@@ -1,17 +1,25 @@
-.zone {
-    /* Existing styles */
-    position: relative; /* Needed for absolute positioning of cards */
-    min-height: 100px; /* Adjust based on your design */
-    min-width: 60px; /* Adjust based on your design */
-  }
-  
-  .card-in-zone {
-    position: absolute;
-    width: 100%;
-    height: 20px; /* Adjust based on your design */
-    bottom: 0;
-    transform-origin: bottom left;
-    /* Adjust the 'nth-child' multiplier for different stack effects */
-    transform: translateY(calc(var(--index) * -10%)); /* Example to stack cards */
-  }
-  
+.card-stack {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Adjust as needed */
+}
+
+.card-in-zone {
+  width: 100%;
+  height: 20px; /* Adjust based on your design */
+  top: 0;
+  left: 0;
+  /* Other styling as before */
+}
+
+.card-stack-indicator {
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  /* Ensure this is visually on top of the last card */
+  z-index: 2; 
+}

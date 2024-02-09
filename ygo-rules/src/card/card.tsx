@@ -1,5 +1,5 @@
 // Card.tsx
-import React from 'react';
+import React, { useEffect, useState  } from 'react';
 import { useDrag } from 'react-dnd';
 import { CardType } from './cardObj'; // Import the Card interface
 
@@ -8,9 +8,14 @@ interface CardProps {
 }
   
 const Card: React.FC<CardProps> = ({ card }) => {
+    useEffect(() => {
+        // Perform actions using card data, like setting state
+        // This ensures actions are re-run when the card prop changes
+      }, [card]); // Dependency array includes card to trigger effect on card change
+
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'CARD', // This should match the 'accept' in Zone's useDrop
-        item: { id: card.id, type: card.type },
+        item: { type: card.type, id: card.id, name: card.name },
         collect: monitor => ({
           isDragging: !!monitor.isDragging(),
         }),
@@ -26,7 +31,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
             cursor: 'move',
         }}
         >
-        {card.content}
+        {card.name}
         </div>
     );
 };
