@@ -21,7 +21,7 @@ const App: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
-        <Field onCardDrop={incrementCardId} />
+        <Field cardDrop={incrementCardId} />
         <CardSearchComponent />
       </div>
     </DndProvider>
