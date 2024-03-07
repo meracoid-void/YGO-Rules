@@ -13,14 +13,14 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({ cardDrop }) => {
-  const [rulings, setRulings] = useState<RulingsResponse | null>(null);
+  const [rulings, setRulings] = useState<RulingsResponse[]>([]);
 
   const fetchRulingsForCard = async (cardId: number) => {
     console.log('card number' + cardId);
     try {
       const response = await axios.get(`https://db.ygorganization.com/data/qa/${cardId}`);
       console.log(response);
-      setRulings(response.data); // Assuming response structure matches your RulingsResponse type
+      setRulings(currentRulings => [...currentRulings, response.data]);
     } catch (error) {
       console.error('Error fetching rulings:', error);
     }
@@ -89,7 +89,9 @@ const Field: React.FC<FieldProps> = ({ cardDrop }) => {
           </div>
         </div>
         <div className="rulings-container">
-          {rulings && <RulingsComponent rulings={rulings} />}
+          {rulings && rulings.map((ruling, index) => (
+            <RulingsComponent rulings={ruling} />
+          )) }
         </div>
       </div>
     );
